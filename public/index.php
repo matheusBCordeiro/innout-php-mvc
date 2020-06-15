@@ -1,13 +1,7 @@
 <?php
 
 require_once(dirname(__FILE__, 2) . '/src/config/database.php');
+require_once(dirname(__FILE__, 2) . '/src/models/User.php');
 
-$sql = 'SELECT * FROM users';
-
-//Database::getConnection();
-$result = Database::getResultFromQuery($sql);
-
-while($row = $result->fetch_assoc()) {
-    print_r($row);
-    echo '<br>';
-}
+$user = new User(['name' => 'User', 'email' => 'user@email.com']);
+print_r($user);
