@@ -29,10 +29,30 @@ class Model
         $this->values[$key] = $value;
     }
 
-    public function getSelect($filters = [], $columns = '*')
+    public static function get($filters = [], $columns = '*')
     {
-        $sql = "SELECT ${columns} FROM users" . static::$tableName;
-        return $sql;
+        $objects = [];
+        $result = static::getResultSetFromSelect($filters, $columns);
+        if ($result) {
+            $class = get_called_class();
+            while ($row = $result->fetch_assoc()) {
+                array_push($objects, new $class($row));
+            }
+        }
+        return $objects;
+    }
+
+    public function getResultSetFromSelect($filters = [], $columns = '*')
+    {
+        $sql = "SELECT ${columns} FROM "
+            . static::$tableName
+            . static::getFilters($filters);
+        $result = Database::getResultFromQuery($sql);
+        if ($result->num_rows === 0) {
+            return null;
+        } else {
+            return $result;
+        }
     }
 
     public function getFilters($filters)
