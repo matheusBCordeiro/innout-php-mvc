@@ -29,7 +29,7 @@
                 </div>
                 <div class="form-group">
                     <label for="password">Senha</label>
-                    <input type="password" id="password" name="password" class="form-control" placeholder="Informe sua senha">
+                    <input type="password" id="password" name="password" class="form-control" value="<? $email ?>" placeholder="Informe sua senha">
                 </div>
             </div>
             <div class="card-footer">
