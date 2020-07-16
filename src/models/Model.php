@@ -111,6 +111,17 @@ class Model
         return $sql;
     }
 
+    public function delete()
+    {
+        static::deleteById($this->id);
+    }
+
+    public static function deleteById($id)
+    {
+        $sql = "DELETE FROM " . static::$tableName . " WHERE id = {$id}";
+        Database::executeSQL($sql);
+    }
+
     public static function getFormatedValue($value)
     {
         if (is_null($value))
