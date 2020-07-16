@@ -1,5 +1,4 @@
 <?php 
-loadModel('WorkingHours');
 session_start();
 requireValidSession();
 
